@@ -1,0 +1,168 @@
+// see https://github.com/pmarsceill/just-the-docs/blob/master/_sass/layout.scss
+
+//
+// Full-width Layout
+//
+
+.side-bar {
+
+  @include mq(md) {
+    width: 0;
+    min-width: $nav-width;
+  }
+}
+
+.main {
+
+  @include mq(md) {
+    width: 100%;
+    max-width: calc(100% - #{$nav-width});
+    margin-left: $nav-width;
+  }
+
+  .main-content-wrap {
+    max-width: $content-width;
+
+    @include mq(lg) {
+      margin-left: calc( ( 100% - #{$nav-width} - #{$content-width} ) / 2 );
+    }
+  }
+}
+
+
+//
+// Style Overrides
+//
+
+.site-title {
+
+  @include mq(lg) {
+    padding-top: .8rem;
+    padding-bottom: .8rem;
+  }
+
+  .site-logo {
+    background-position: center;
+  }
+}
+
+// Nav hovers
+.nav-list .nav-list-item .nav-list-link:hover,
+.nav-list .nav-list-item .nav-list-link.active {
+  background: $feedback-color;
+}
+
+.search-result:hover,
+.search-result.active {
+  background-color: $sidebar-color;
+}
+
+// Nav child link color
+.nav-list .nav-list-item > .nav-list .nav-list-item .nav-list-link {
+  color: $grey-dk-250;
+}
+
+// Full width nav links
+.nav-list .nav-list-item > .nav-list {
+  padding-left: 0;
+}
+
+.nav-list .nav-list a.nav-list-link:before {
+  content: '';
+  display: inline-block;
+  padding-left: $sp-3;
+}
+
+.nav-list .nav-list .nav-list a.nav-list-link:before {
+  content: '';
+  display: inline-block;
+  padding-left: #{$sp-3 * 2};
+}
+
+// Auxiliary nav
+.aux-nav {
+
+  @include mq(lg) {
+    padding-right: 0;
+  }
+}
+
+// Labels
+.label {
+  padding: .25em .97em .25em 1em;
+  letter-spacing: .03em;
+}
+
+//
+// Typography
+//
+
+h1, .text-alpha {
+  font-weight: 800;
+}
+
+h2, .text-beta,
+h3, .text-gamma,
+h4, .text-delta,
+h5, .text-epsilon,
+h6, .text-zeta {
+  font-weight: 700;
+}
+
+//
+// Custom Banner Components
+//
+
+.banner {
+  padding: 1em;
+  margin: 1.25em 0;
+  border-radius: $border-radius;
+  position: relative;
+  background-color: $grey-lt-000;
+  border: $border $grey-lt-300;
+  color: $grey-dk-100;
+
+  &-info {
+    background-color: $blue-000;
+    border-color: $blue-100;
+    color: $blue-300;
+  }
+
+  &-success {
+    background-color: $green-000;
+    border-color: $green-100;
+    color: $green-300;
+  }
+
+  &-warning {
+    background-color: $yellow-000;
+    border-color: $yellow-100;
+    color: $yellow-300;
+  }
+
+  &-danger {
+    background-color: $red-000;
+    border-color: $red-100;
+    color: $red-300;
+  }
+
+  @include mq(md) {
+    padding: 1.25em;
+  }
+
+  :not(a) {
+    color: inherit !important;
+  }
+
+  > p:first-of-type {
+    margin-top: .75em;
+  }
+
+  > :first-child {
+    margin-top: 0 !important;
+  }
+
+  > :last-child {
+    margin-bottom: 0 !important;
+  }
+}
