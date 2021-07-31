@@ -1,12 +1,23 @@
-# Welcome to My Notebook
+# Developer Notebook
 
-This is where I keep quick notes about web development. You'll find my tips, tricks, and even some handy snippets.
-{: .text-beta .fw-300 .text-grey-dk-000}
+This GitHub Pages-powered site was created as an alternative to GitHub Gists.
 
----
+This site is much more user-friendly, searchable, and customizable than the GitHub Gists interface. It's also easier and more natural to collaborate on a repository by adding and revoking collaborator access.
 
-## About
+## Local Development
 
-I'm Michelle, a full-stack WordPress developer. In my spare time, I enjoy working on a few WordPress plugins of my own! I believe in quality over quantity. For that reason, I prefer finely crafting a few plugins rather than maintaining a plethora of mediocre projects.
+To make edits to this site, you'll need to use [**Ruby 2.7.X**](https://formulae.brew.sh/formula/ruby@2.7) until [Issue #752](https://github.com/github/pages-gem/issues/752) is resolved in the `github-pages` gem.
 
-My favorite words are "clean", "simple", and "efficient".
+You'll also need [**Bundler**](https://bundler.io/) by running `gem install bundler`.
+
+Use the following commands to build or serve the site. Use `--verbose` if you're having issues or want more detailed output.
+
+```bash
+# Install gem dependencies
+bundle
+# Build only, output to /_site
+bundle exec jekyll build
+# Build and watch files, served at http://127.0.0.1:4000/
+bundle exec jekyll serve
+```
+

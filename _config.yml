@@ -2,6 +2,9 @@
 remote_theme: pmarsceill/just-the-docs
 # For options, see https://pmarsceill.github.io/just-the-docs/docs/configuration/
 title: "Purple Turtle Creative: Notebook"
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://notes.purpleturtlecreative.com" # the base hostname & protocol for your site, e.g. http://example.com
+exclude: [ "README.md", "CNAME", "Gemfile", "*.lock", ".git*" ]
 # Set a path/url to a logo that will be displayed instead of the title
 logo: "/assets/images/notes.purpleturtlecreative.com.svg"
 
@@ -49,6 +52,10 @@ just_the_docs:
   collections:
     notes:
       name: Notes
+
+# Enable plugins
+plugins:
+  - jekyll-remote-theme # allows this to be run locally by loading the remote theme
 
 # Front Matter defaults: https://jekyllrb.com/docs/configuration/front-matter-defaults/
 defaults:
