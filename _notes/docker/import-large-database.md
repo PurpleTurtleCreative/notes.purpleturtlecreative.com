@@ -19,7 +19,7 @@ nav_order: 1
 
 ## Import MySQL data from copied file
 Source: [https://stackoverflow.com/a/22155778](https://stackoverflow.com/a/22155778)
-```mysql
+```bash
 mysql> set global net_buffer_length=1000000; --Set network buffer length to a large byte number
 mysql> set global max_allowed_packet=1000000000; --Set maximum allowed packet size to a large byte number
 mysql> SET foreign_key_checks = 0; --Disable foreign key checking to avoid delays,errors and unwanted behaviour
@@ -28,7 +28,7 @@ mysql> SET foreign_key_checks = 1; --Remember to enable foreign key checks when 
 ```
 
 In fewer copy-paste commands:
-```
+```bash
 set global net_buffer_length=1000000; set global max_allowed_packet=1000000000; set foreign_key_checks = 0;
 source /home/wordpress_prod.sql
 set foreign_key_checks = 1;
