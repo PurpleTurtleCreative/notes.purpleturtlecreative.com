@@ -1,10 +1,10 @@
 ---
-title: bulk-git-patch.sh
-parent: Linux
+title: Bulk Patch
+parent: Git
 nav_order: 1
 ---
 
-# Git Patch all Applicable Repositories
+# Git Patch All Applicable Repositories
 
 Script to apply patch files to applicable repositories via Git. Changes should then be confirmed via GitHub Pull Requests for the pushed branches.
 
