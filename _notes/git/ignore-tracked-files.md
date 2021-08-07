@@ -12,8 +12,6 @@ Additionally, some files are automatically updated when performing operations to
 
 To ignore changes to certain tracked files, Git can be told to assume certain files are unchanged—which effectively means Git will ignore any changes to these files.
 
-*Documentation: https://git-scm.com/docs/git-update-index#Documentation/git-update-index.txt---no-assume-unchanged*
-
 ```bash
 # git update-index --assume-unchanged <file>...
 git update-index --assume-unchanged docker-compose.yml wp-config.php
@@ -26,15 +24,12 @@ To stop ignoring changes and begin tracking them again, prefix the option with `
 git update-index --no-assume-unchanged docker-compose.yml
 ```
 
-*Answer originally found here: https://stackoverflow.com/a/10755704*
+*[Documentation](https://git-scm.com/docs/git-update-index#Documentation/git-update-index.txt---no-assume-unchanged) / [Source](https://stackoverflow.com/a/10755704)*
 
 ## List Files Marked as `--assume-unchaged`
-
-*Documentation: http://git-scm.com/docs/git-ls-files#Documentation/git-ls-files.txt--v*
-
-*Answer originally found here: https://stackoverflow.com/a/2363495*
 
 ```bash
 git ls-files -v | grep '^[a-z]'
 ```
 
+*[Documentation](http://git-scm.com/docs/git-ls-files#Documentation/git-ls-files.txt--v) / [Source](https://stackoverflow.com/a/2363495)*
