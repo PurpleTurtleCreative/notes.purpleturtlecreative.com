@@ -11,3 +11,12 @@ Log up to the last 20 stacktraces for review.
 ```php
 error_log( print_r( debug_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS, 20 ), true ) );
 ```
+
+## Logging Variable
+
+Pretty formatting when logging an object or array variable.
+
+```php
+error_log( print_r( $var, true ) );
+```
+

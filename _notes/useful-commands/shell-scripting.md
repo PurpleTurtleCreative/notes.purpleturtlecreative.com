@@ -1,10 +1,10 @@
 ---
-title: Linux
+title: Shell Scripting
 parent: Useful Commands
 nav_order: 1
 ---
 
-# Useful Commands: Linux
+# Useful Commands: Shell Scripting
 
 ## Find directories that have a particular plugin
 Use in your project directory containing WordPress sites. Writes results to the specified file.

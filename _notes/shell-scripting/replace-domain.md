@@ -1,6 +1,6 @@
 ---
 title: Replace Domain
-parent: Linux
+parent: Shell Scripting
 nav_order: 1
 ---
 
