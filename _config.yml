@@ -18,6 +18,8 @@ search_enabled: true
 aux_links:
   "View on GitHub":
     - "https://github.com/PurpleTurtleCreative/notes"
+  "Visit Website":
+    - "https://purpleturtlecreative.com/"
 # Makes Aux links open in a new tab. Default is false
 aux_links_new_tab: false
 
