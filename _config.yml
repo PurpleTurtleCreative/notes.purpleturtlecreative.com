@@ -41,8 +41,8 @@ gh_edit_view_mode: "edit" # "tree" or "edit" if you want the user to jump into t
 
 # Google Analytics Tracking (optional)
 # e.g, UA-1234567-89
-# ga_tracking: "UA-110192612-2"
-# ga_tracking_anonymize_ip: true # Use GDPR compliant Google Analytics settings (true by default)
+ga_tracking: "UA-110192612-3"
+ga_tracking_anonymize_ip: true # Use GDPR compliant Google Analytics settings (true by default)
 
 # Define Jekyll collections
 collections:
