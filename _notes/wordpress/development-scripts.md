@@ -4,7 +4,7 @@ parent: WordPress
 nav_order: 1
 ---
 
-# Development Scripts for Local WordPress Development
+# Scripts for Local WordPress Development
 
 **Some of these scripts are NOT production-safe. Only implement on a production site if you fully understand what the script is doing.**
 {: .banner .banner-danger}
@@ -29,6 +29,16 @@ add_filter( 'wp_calculate_image_srcset', function( $sources ) {
 	}
 	return $sources;
 }, 10 );
+
+/**
+ * Dequeue WordFence's authentication JavaScript preventing empty password.
+ *
+ * @see wp-content/plugins/wordfence/modules/login-security/classes/controller/wordfencels.php
+ */
+add_action( 'login_enqueue_scripts', function() {
+	wp_dequeue_script( 'wordfence-ls-login' );
+	wp_dequeue_style( 'wordfence-ls-login' );
+}, 999 );
 
 /**
  * Authenticate all login requests if username is valid. Password can be blank.
