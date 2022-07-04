@@ -1,10 +1,10 @@
 ---
-title: HTTP Requests
+title: HTTP Requests in PHP
 parent: PHP
 nav_order: 1
 ---
 
-# HTTP Requests
+# HTTP Requests in PHP
 
 Use the cURL functions in PHP to make HTTP requests and observe the response.
 
@@ -33,7 +33,7 @@ curl_setopt_array(
 	]
 );
 
-// Debugging.
+// Inspect the response.
 error_log( print_r( json_decode( curl_exec( $ch ) ), true ) );
 error_log( print_r( curl_getinfo( $ch ), true ) );
 
