@@ -1,5 +1,5 @@
 ---
-title: HTTP Requests in PHP
+title: HTTP Requests
 parent: PHP
 nav_order: 1
 ---
@@ -33,8 +33,11 @@ curl_setopt_array(
 	]
 );
 
+// Send the request.
+$response = curl_exec( $ch );
+
 // Inspect the response.
-error_log( print_r( json_decode( curl_exec( $ch ) ), true ) );
+error_log( print_r( $response, true ) );
 error_log( print_r( curl_getinfo( $ch ), true ) );
 
 // Close the session and free resources.

@@ -1,5 +1,5 @@
 ---
-title: HTTP Requests in WordPress
+title: HTTP Requests
 parent: WordPress
 nav_order: 1
 ---
@@ -27,7 +27,7 @@ $request_url = add_query_arg(
 	'https://purpleturtlecreative.com/'
 );
 
-// Send the event to be recorded.
+// Send the request.
 $response = wp_remote_request(
 	$request_url,
 	[
