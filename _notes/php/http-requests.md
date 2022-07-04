@@ -10,9 +10,9 @@ Use the cURL functions in PHP to make HTTP requests and observe the response.
 
 Here's some helpful references from PHP's documentation:
 
-- **cURL Options:** https://www.php.net/manual/en/function.curl-setopt.php
-- **cURL Info Options:** https://www.php.net/manual/en/function.curl-getinfo.php
-- **cURL Multiple (Asynchronous) Requests:** https://www.php.net/manual/en/function.curl-multi-init.php
+- **cURL Options:** [https://www.php.net/manual/en/function.curl-setopt.php](https://www.php.net/manual/en/function.curl-setopt.php)
+- **cURL Info Options:** [https://www.php.net/manual/en/function.curl-getinfo.php](https://www.php.net/manual/en/function.curl-getinfo.php)
+- **cURL Multiple (Asynchronous) Requests:** [https://www.php.net/manual/en/function.curl-multi-init.php](https://www.php.net/manual/en/function.curl-multi-init.php)
 
 ## POST
 
