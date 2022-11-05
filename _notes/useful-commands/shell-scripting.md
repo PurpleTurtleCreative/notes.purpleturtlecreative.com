@@ -47,7 +47,16 @@ Refactor SCSS namespace format `colors.$grey-darker` to function format `color(g
 grep -FRl --include='*.scss' --exclude='*/node_modules/*' 'colors.$' /path/to/assets/styles/scss | xargs sed -i '' -E 's#colors.\$([a-z\-]*)#color\(\1\)#g'
 ```
 
+### Refactoring version placeholders before a release
+
+Refactor version placeholder tags in docblocks to prepare for a release.
+
+```bash
+grep -FRl --exclude='*/node_modules/*' '@since [unreleased]' . | xargs sed -i '' -e 's#\@since \[unreleased\]#\@since 3\.4\.0#g'
+```
+
 ## Removing Lines
+
 Useful when deleting files and needing to remove lines referencing them for inclusion or import. _([source](https://stackoverflow.com/a/5410784))_
 ```bash
 grep -FRl --include='*.scss' --exclude='*/node_modules/*' "@import '../../_tools/scss/mixins';" . | xargs sed -i '' -e "/@import '..\/..\/_tools\/scss\/mixins';/d"
