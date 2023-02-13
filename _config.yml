@@ -1,6 +1,6 @@
-# https://github.com/pmarsceill/just-the-docs
-remote_theme: pmarsceill/just-the-docs
-# For options, see https://pmarsceill.github.io/just-the-docs/docs/configuration/
+# https://github.com/just-the-docs/just-the-docs
+remote_theme: just-the-docs/just-the-docs@v0.4.0
+# For options, see https://github.com/just-the-docs/just-the-docs/blob/main/docs/configuration.md
 title: "Purple Turtle Creative: Notebook"
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://notes.purpleturtlecreative.com" # the base hostname & protocol for your site, e.g. http://example.com
@@ -41,7 +41,7 @@ gh_edit_view_mode: "edit" # "tree" or "edit" if you want the user to jump into t
 
 # Google Analytics Tracking (optional)
 # e.g, UA-1234567-89
-ga_tracking: "UA-110192612-3"
+ga_tracking: "G-MCW7SDZ038"
 ga_tracking_anonymize_ip: true # Use GDPR compliant Google Analytics settings (true by default)
 
 # Define Jekyll collections

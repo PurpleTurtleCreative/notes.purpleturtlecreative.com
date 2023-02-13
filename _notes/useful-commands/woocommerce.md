@@ -81,3 +81,42 @@ WooCommerce does not always properly disable the Place Order button when checkou
 </style>
 ```
 
+## Export Orders Containing ONLY Certain Line Items
+
+Uses the WooCommerce Orders Export plugin.
+
+```php
+add_filter( 'woe_order_export_started', function( $order_id ) { 
+
+	// Return ONLY orders that contain these products ONLY.
+	$found_product_ids = [
+		'product_11057' => false,
+		'product_538' => false
+	];
+
+	$order = new WC_Order( $order_id );
+	$order_items = $order->get_items();
+
+	foreach ( $order->get_items() as $item_id => $item_values ) {
+		$product_id = $item_values->get_product_id();
+		if ( isset( $found_product_ids[ "product_{$product_id}" ] ) ) {
+			$found_product_ids[ "product_{$product_id}" ] = true;
+		} elseif ( false === wc_pb_is_bundled_order_item( $item_values, $order ) ) {
+			// Abort. An undesired product is in this order.
+			return false;
+		}
+	}
+
+	// Verify we found all products we wanted.
+	foreach ( $found_product_ids as $is_in_order ) {
+		if ( false === $is_in_order ) {
+			// Abort. Not all required products are in this order.
+			return false;
+		}
+	}
+
+	// Order passed successfully and should be in the report.
+	return $order_id;
+});
+```
+
