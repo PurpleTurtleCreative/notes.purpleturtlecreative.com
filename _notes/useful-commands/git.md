@@ -42,3 +42,38 @@ git rebase -i HEAD~n
 # Save and exit.
 git push --force
 ```
+
+## Automatically Set Remote HEAD ref
+
+If you change the HEAD branch of a remote, you'll likely encounter the error:
+
+```
+fatal: ref refs/remotes/origin/HEAD is not a symbolic ref
+```
+
+You can fix it automatically with this command:
+
+```bash
+git remote set-head origin -a
+```
+
+## List Tags with Commit SHAs
+
+Tags are their own objects, which you can see by running:
+
+```bash
+git show-ref --tags
+```
+
+To know which commits each tag actually points to, dereference them and clean up the output:
+
+```bash
+git show-ref --tags -d | grep -F '^{}' | sed -e 's#refs/tags/##' | sed -e 's#\^{}##'
+```
+
+If your shell supports extended regex for the `sed` command, then this can be shortened to:
+
+```bash
+git show-ref --tags -d | grep -F '^{}' | sed -E 's#refs/tags/(.+)\^\{\}#\1#'
+```
+
