@@ -52,7 +52,7 @@ grep -FRl --include='*.scss' --exclude='*/node_modules/*' 'colors.$' /path/to/as
 Refactor version placeholder tags in docblocks to prepare for a release.
 
 ```bash
-grep -FRl --exclude='*/node_modules/*' '@since [unreleased]' . | xargs sed -i '' -e 's#\@since \[unreleased\]#\@since 3\.4\.0#g'
+grep -FRl --exclude='*/node_modules/*' --exclude='*/vendor/*' '[unreleased]' . | xargs sed -i '' -e 's#\[unreleased\]#3\.4\.0#g'
 ```
 
 ## Removing Lines
