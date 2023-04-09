@@ -1,11 +1,11 @@
 ---
 layout: default
-title: Home
+title: About
 nav_order: 0
 permalink: /
 ---
 
-# Welcome to My Notebook
+# Developer Notebook
 
 Quick notes about web development such as tips, tricks, and even some handy snippets.
 {: .text-beta .fw-300 .text-grey-dk-000}
@@ -14,9 +14,9 @@ Quick notes about web development such as tips, tricks, and even some handy snip
 
 ## About
 
-Purple Turtle Creative, LLC offers made-to-order, custom WordPress software such as themes, plugins, web applications, and API integrations.
+[Purple Turtle Creative, LLC](https://purpleturtlecreative.com/) designs and builds API integrations for WordPress.
 
-This website logs quick tips and snippets for reference during projects. For more in-depth articles, please [visit the Purple Turtle Creative blog](https://purpleturtlecreative.com/blog/).
+This website logs quick tips and snippets for reference during projects.
 
-If you're willing to pay for professional WordPress development, do not hesitate to [request a free estimate](https://purpleturtlecreative.com/#contact)!
+For more in-depth articles, please [visit the Purple Turtle Creative blog](https://purpleturtlecreative.com/blog/).
 
