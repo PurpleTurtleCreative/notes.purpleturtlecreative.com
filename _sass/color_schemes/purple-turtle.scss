@@ -1,4 +1,18 @@
-// Defaults https://github.com/pmarsceill/just-the-docs/blob/master/_sass/support/_variables.scss
+// Defaults https://github.com/just-the-docs/just-the-docs/blob/main/_sass/support/_variables.scss
+
+// Font size
+// `-sm` suffix is the size at the small (and above) media query
+
+$font-size-2: 12px; // h4 - uppercased!, h6 not uppercased, text-small
+$font-size-3: 14px; // h5
+$font-size-4: 16px; // html root mobile
+$font-size-5: 18px; // html root desktop, h3
+$font-size-6: 20px; // h2
+$font-size-7: 24px;
+$font-size-8: 32px; // h1
+$font-size-9: 36px;
+$font-size-10: 42px;
+$font-size-10-sm: 48px;
 
 //
 // Colors
@@ -51,7 +65,7 @@ $table-background-color: $white;//default
 $code-background-color: $grey-lt-000;//default
 $feedback-color: darken($sidebar-color, 3%);//default
 
-$body-text-color: $grey-dk-200;
+$body-text-color: $grey-dk-300;
 $body-heading-color: $grey-dk-300;//default
 $search-result-preview-color: $grey-dk-000;//default
 $nav-child-link-color: $grey-dk-100;//default

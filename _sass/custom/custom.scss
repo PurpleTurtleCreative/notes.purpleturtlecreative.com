@@ -26,6 +26,37 @@
     @include mq(lg) {
       margin-left: calc( ( 100% - #{$nav-width} - #{$content-width} ) / 2 );
     }
+
+    .main-content {
+
+      ul,
+      ol {
+
+        li {
+          margin: 0.5em 0;
+        }
+      }
+
+      .language-plaintext {
+        pre {
+          white-space: normal;
+        }
+      }
+
+      code {
+        padding: 0.2em 0.4em;
+      }
+
+      pre {
+        code {
+          padding: 0;
+        }
+      }
+
+      div.highlighter-rouge {
+        border: $border $grey-lt-100;
+      }
+    }
   }
 }
 
@@ -37,7 +68,7 @@
 .site-title {
 
   @include mq(lg) {
-    padding: .15rem;
+    padding: .6rem;
   }
 
   .site-logo {
@@ -96,16 +127,52 @@
 // Typography
 //
 
-h1, .text-alpha {
-  font-weight: 800;
+.anchor-heading {
+
+  h1 &,
+  #table-of-contents & {
+    display: none !important;
+  }
 }
 
+h1, .text-alpha,
 h2, .text-beta,
 h3, .text-gamma,
 h4, .text-delta,
 h5, .text-epsilon,
 h6, .text-zeta {
-  font-weight: 700;
+  font-weight: 800;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+  letter-spacing: 0.03em;
+  margin: 2em 0 1rem !important;
+}
+
+h2:not(#table-of-contents) {
+  margin-top: 3em;
+
+  &::after {
+    content: "";
+    display: block;
+    height: 1px;
+    width: 2em;
+    margin: 0.8em 0 1em;
+    background: $grey-lt-200;
+  }
+
+  .anchor-heading {
+    height: calc(100% - 0.8em);
+  }
+}
+
+.ws-normal,
+.ws-normal * {
+  white-space: normal;
 }
 
 //
@@ -149,8 +216,12 @@ h6, .text-zeta {
     padding: 1.25em;
   }
 
-  :not(a) {
+  * {
     color: inherit !important;
+  }
+
+  a {
+    text-decoration-color: currentColor !important;
   }
 
   > p:first-of-type {
@@ -163,5 +234,16 @@ h6, .text-zeta {
 
   > :last-child {
     margin-bottom: 0 !important;
+  }
+
+  h1, .text-alpha,
+  h2, .text-beta,
+  h3, .text-gamma,
+  h4, .text-delta,
+  h5, .text-epsilon,
+  h6, .text-zeta {
+    text-transform: none;
+    margin-bottom: 0.8em;
+    letter-spacing: normal;
   }
 }
