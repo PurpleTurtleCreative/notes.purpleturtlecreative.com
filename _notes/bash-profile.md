@@ -4,7 +4,7 @@ has_children: false
 nav_order: 0
 ---
 
-# Personal Web Development Setup
+# BASH Profile
 
 ```bash
 # Binaries
