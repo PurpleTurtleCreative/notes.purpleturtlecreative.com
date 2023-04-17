@@ -37,9 +37,21 @@ alias sublime='open -a "Sublime Text"'
 alias ptc-pull-backups='bash /Users/michelle/web/scripts/purple-turtle-creative/pull-backups.sh'
 alias ptc-update-staging='bash /Users/michelle/web/scripts/purple-turtle-creative/update-staging.sh'
 
+ptc-resources() {
+
+	PTC_RESOURCES_ABSPATH="/var/www/html/wp-content/plugins/ptc-resources-server/resources"
+
+	echo
+	echo "ABSPATH: $PTC_RESOURCES_ABSPATH"
+	echo
+	echo 'Available plugins resources:'
+	echo
+	ssh ptc "ls $PTC_RESOURCES_ABSPATH/plugins/*" | sed -e "s#$PTC_RESOURCES_ABSPATH/##"
+}
+
 ptc-push-resource() {
 	# $1 - source file to upload
-	# $2 - resources directory destination (ie. plugins/completionist)
+	# $2 - resources directory destination (eg. plugins/completionist)
 
 	SOURCE="$1"
 	if [[ -z "$SOURCE" ]]; then
@@ -70,6 +82,41 @@ ptc-push-resource() {
 
 	scp "$SOURCE" ptc:"$RESOURCE_DEST_ABS"
 	ssh ptc "chmod 775 \"$RESOURCE_DEST_ABS\"; chgrp www-data \"$RESOURCE_DEST_ABS\""
+}
+
+ptc-download-resource() {
+	# $1 - resource file to download (eg. plugins/completionist-pro/completionist-pro-1.1.0.zip)
+	# $2 - local file destination (eg. ~/Downloads)
+
+	PTC_RESOURCES_ABSPATH="/var/www/html/wp-content/plugins/ptc-resources-server/resources"
+
+	RESOURCE_FILE="$1"
+	if [[ -z "$RESOURCE_FILE" ]]; then
+		echo 'Missing argument 1: resource file to download (eg. plugins/completionist-pro/completionist-pro-1.1.0.zip)'
+		ptc-resources
+		return 1
+	elif [[ $(echo "$RESOURCE_FILE" | sed -E 's#^([^/]+).*#\1#') != 'plugins' ]]; then
+		echo 'Invalid argument 1: resource file to download must begin with "plugins" since that is the only supported resources type at this time'
+		return 1
+	elif [[ "${RESOURCE_FILE##*.}" != 'test' ]]; then
+		echo "Invalid argument 1: resource file to download should end with .zip extension, found ${RESOURCE_FILE##*.}"
+		return 1
+	fi
+
+	RESOURCE_FILE_ABS="$PTC_RESOURCES_ABSPATH/$RESOURCE_FILE"
+
+	# Remove all trailing slashes.
+	LOCAL_DEST=$(echo "$2" | sed 's#/*$##')
+	if [[ -z "$LOCAL_DEST" ]]; then
+		echo 'Missing argument 2: local file destination (eg. ~/Downloads)'
+		return 2
+	fi
+
+	echo "RESOURCE_FILE      = $RESOURCE_FILE"
+	echo "RESOURCE_FILE_ABS  = $RESOURCE_FILE_ABS"
+	echo "LOCAL_DEST         = $LOCAL_DEST"
+
+	scp ptc:"$RESOURCE_FILE_ABS" "$LOCAL_DEST"
 }
 
 alias rsync-plugin='rsync --archive --delete --progress --exclude="*/.git*" --exclude=".gitignore" --exclude=".DS_Store" --exclude="*.log" --exclude="*/node_modules/*"'
