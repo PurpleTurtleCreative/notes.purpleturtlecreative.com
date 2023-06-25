@@ -104,6 +104,130 @@ WHERE
   AND postmeta.meta_key = '_is4wp_membership_levels'
 ```
 
+## WooCommerce Product Counts
+
+Useful for marketing and "social proof" purposes.
+
+```sql
+# Count line item instances of 12345 purchased.
+
+Select
+	Count(wwoi.meta_id) As Sum_meta_id
+From
+	wp_posts wppo
+	Inner Join
+		wp_woocommerce_order_items wwoi1 On wppo.ID = wwoi1.order_id
+	Inner Join
+		wp_woocommerce_order_itemmeta wwoi On wwoi.order_item_id = wwoi1.order_item_id
+Where
+	wppo.post_type = 'shop_order' And
+	( wppo.post_status = 'wc-completed' Or
+	wppo.post_status = 'wc-processing' ) And
+	wwoi.meta_key = '_product_id' And
+	wwoi.meta_value = 12345
+
+# Count total quantity of 12345 purchased.
+
+Select
+	SUM(wwoi_qty.meta_value)
+From
+	wp_posts wppo
+	Inner Join
+		wp_woocommerce_order_items wwoi1 On wppo.ID = wwoi1.order_id
+	Inner Join
+		wp_woocommerce_order_itemmeta wwoi On wwoi.order_item_id = wwoi1.order_item_id
+	Inner Join
+		wp_woocommerce_order_itemmeta wwoi_qty On wwoi_qty.order_item_id = wwoi1.order_item_id
+Where
+	wppo.post_type = 'shop_order' And
+	( wppo.post_status = 'wc-completed' Or
+	wppo.post_status = 'wc-processing' ) And
+	wwoi.meta_key = '_product_id' And
+	wwoi.meta_value = 12345 And
+	wwoi_qty.meta_key = '_qty'
+
+# Count unique customer billing emails for orders containing 12345.
+
+Select
+	COUNT(DISTINCT ordermeta.meta_value)
+From
+	wp_posts wppo
+	Inner Join
+		wp_woocommerce_order_items wwoi1 On wppo.ID = wwoi1.order_id
+	Inner Join
+		wp_woocommerce_order_itemmeta wwoi On wwoi.order_item_id = wwoi1.order_item_id
+	Inner Join
+		wp_postmeta ordermeta On wppo.ID = ordermeta.post_id
+Where
+	wppo.post_type = 'shop_order' And
+	( wppo.post_status = 'wc-completed' Or
+	wppo.post_status = 'wc-processing' ) And
+	wwoi.meta_key = '_product_id' And
+	wwoi.meta_value = 12345 And
+	ordermeta.meta_key = '_billing_email'
+
+# Count orders containing 12345 that is NOT a bundled item.
+
+Select
+	COUNT(DISTINCT wppo.ID)
+From
+	wp_posts wppo
+	Inner Join
+		wp_woocommerce_order_items wwoi1 On wppo.ID = wwoi1.order_id
+	Inner Join
+		wp_woocommerce_order_itemmeta wwoi On wwoi.order_item_id = wwoi1.order_item_id
+Where
+	wppo.post_type = 'shop_order' And
+	( wppo.post_status = 'wc-completed' Or
+	wppo.post_status = 'wc-processing' ) And
+	wwoi.meta_key = '_product_id' And
+	wwoi.meta_value = 12345 And
+	wwoi.order_item_id NOT IN (
+		SELECT order_item_id
+		FROM wp_woocommerce_order_itemmeta
+		WHERE meta_key = '_bundled_item_id'
+	)
+```
+
 ## Inspecting a Runaway Process
 
 When there’s a runaway MySQL query (confirmed via `htop` in SSH), log into `mysql -uxxxxx -pxxxxx` and then run the query [`SHOW FULL PROCESSLIST;`](https://dev.mysql.com/doc/refman/8.0/en/show-processlist.html) to see which query is currently running (ie. hung).
+
+## MySQL InnoDB Optimization
+
+For databases running queries with large query results, it's important to increase the buffer pool so the cache remains effective:
+
+- [https://dev.mysql.com/doc/refman/8.0/en/innodb-buffer-pool.html](https://dev.mysql.com/doc/refman/8.0/en/innodb-buffer-pool.html)
+
+- [https://dev.mysql.com/doc/refman/8.0/en/innodb-buffer-pool-resize.html](https://dev.mysql.com/doc/refman/8.0/en/innodb-buffer-pool-resize.html)
+
+Display the current InnoDB buffer pool size in gigabytes:
+
+```sql
+SELECT @@innodb_buffer_pool_size/1024/1024/1024;
+```
+
+Display all of the MySQL daemon's options and their values:
+
+```bash
+mysqld --verbose --help
+```
+
+Review and update the InnoDB configuration variables:
+
+- [https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html)
+
+- [https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html](https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html)
+
+```sql
+SHOW VARIABLES;
+SET innodb_page_cleaners = 4, innodb_buffer_pool_instances = 8,innodb_buffer_pool_size = 23622320128;
+```
+
+## Connecting to an External Database
+
+```bash
+mysql --host="12.345.6.7" --user="mydbuser" --password="mydbpass"
+```
+
+Create database droplet in DigitalOcean. Use internal, private IP address to connect (such as logging in via CLI or updating wp-config.php).

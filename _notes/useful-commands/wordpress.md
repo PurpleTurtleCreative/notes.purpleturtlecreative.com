@@ -39,3 +39,16 @@ public static function get_post_ids() {
 	return is_array( $post_ids ) ? $post_ids : array();
 }
 ```
+
+## WP CLI Create User
+
+Creates an administrator user with the given username and email.
+
+The WordPress user's password is automatically generated and displayed in the terminal upon success.
+
+*[See the official documentation for more arguments.](https://developer.wordpress.org/cli/commands/user/create/)*
+
+```bash
+wp user create michelleptc michelle@purpleturtlecreative.com --role='administrator'
+```
+

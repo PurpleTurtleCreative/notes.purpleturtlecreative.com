@@ -120,3 +120,78 @@ add_filter( 'woe_order_export_started', function( $order_id ) {
 });
 ```
 
+## Dynamically Add Promotional Product to Cart
+
+This code was written for a client that wanted to add a freebie product to the customer's cart as long as their cart contained a qualifying product. A higher-tier freebie would be added instead if the customer's cart contained a qualifying product AND exceeded a $100 subtotal.
+
+```php
+// Add promotional product to cart for qualifying orders.
+// Compatible with WooCommerce's cart AJAX loading.
+add_action( 'woocommerce_before_cart', 'ptc_modify_cart_items', 999, 1 );
+function ptc_modify_cart_items() {
+
+	// Define qualifying cart item products IDs.
+	$qualifying_product_ids = array(
+		123456,
+		789012,
+		345678,
+		901234,
+		567890,
+	);
+
+	// Define possible reward offers to add/remove from cart.
+	$standard_gift_product_id = 100234;
+	$premium_gift_product_id  = 560078;
+
+	// Check the cart to see if qualified for promotional offer.
+
+	$cart = WC()->cart;
+
+	$found_qualifying_product_in_cart = false;
+
+	$standard_gift_cart_item_key = '';
+	$premium_gift_cart_item_key = '';
+
+	foreach ( $cart->get_cart() as $cart_item_key => $cart_item ) {
+		if (
+			in_array( $cart_item['product_id'], $qualifying_product_ids ) ||
+			in_array( $cart_item['variation_id'], $qualifying_product_ids )
+		) {
+			// Found qualifying product ID.
+			$found_qualifying_product_in_cart = true;
+		} elseif (
+			$standard_gift_product_id == $cart_item['product_id'] ||
+			$standard_gift_product_id == $cart_item['variation_id']
+		) {
+			// Found standard gift already in cart.
+			$standard_gift_cart_item_key = $cart_item_key;
+		} elseif (
+			$premium_gift_product_id == $cart_item['product_id'] ||
+			$premium_gift_product_id == $cart_item['variation_id']
+		) {
+			// Found premium gift already in cart.
+			$premium_gift_cart_item_key = $cart_item_key;
+		}
+	}
+
+	// Always remove reward cart items until qualified.
+
+	if ( ! empty( $standard_gift_cart_item_key ) ) {
+		$cart->remove_cart_item( $standard_gift_cart_item_key );
+	}
+
+	if ( ! empty( $premium_gift_cart_item_key ) ) {
+		$cart->remove_cart_item( $premium_gift_cart_item_key );
+	}
+
+	// Add applicable reward if cart qualifies.
+	if ( true === $found_qualifying_product_in_cart ) {
+		if ( $cart->get_subtotal() >= 100 ) {
+			$cart->add_to_cart( $premium_gift_product_id );
+		} else {
+			$cart->add_to_cart( $standard_gift_product_id );
+		}
+	}
+}
+```
+
